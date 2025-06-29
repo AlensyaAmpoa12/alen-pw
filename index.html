@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biografi Alen</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <style>
+    /* Gaya CSS Kustom */
+    :root {
+      --primary-purple: #8A2BE2; /* Ungu utama (lebih gelap) */
+      --secondary-purple: #9370DB; /* Ungu sekunder (sedikit lebih terang) */
+      --light-purple: #E6E6FA; /* Lavender (ungu sangat muda untuk kartu) */
+      --text-dark-purple: #4B0082; /* Indigo (ungu sangat gelap untuk teks) */
+      --text-light: #f8f9fa;
+      --bg-light: #f8f9fa;
+      --bg-dark: #343a40; /* Masih bisa digunakan untuk footer jika ingin gelap */
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark); /* Menggunakan warna teks standar Bootstrap */
+      background-color: var(--bg-light);
+    }
+
+    .navbar {
+      /* Mengubah latar belakang navbar agar sesuai dengan gradasi profil */
+      background: linear-gradient(to right, var(--primary-purple), var(--secondary-purple)) !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Tambahkan sedikit bayangan */
+    }
+
+    .navbar-brand, .nav-link {
+      /* Mengubah warna teks navbar menjadi ungu gelap */
+      color: var(--text-light) !important;
+      font-weight: 600; /* Sedikit lebih tebal */
+    }
+
+    .navbar-toggler-icon {
+      filter: none; /* Kembalikan warna default atau sesuaikan jika ingin gelap */
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2875, 0, 130, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    .nav-link.active {
+      font-weight: bold;
+      /* Tambahkan sedikit efek untuk link aktif */
+      border-bottom: 2px solid var(--text-dark-purple);
+      padding-bottom: 3px;
+    }
+
+    .dropdown-menu {
+      border: none; /* Hapus border default dropdown */
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown-item {
+      color: var(--text-dark-purple);
+    }
+
+    .dropdown-item:hover {
+      background-color: var(--light-purple);
+    }
+
+
+    .profile-section {
+      background: linear-gradient(to right, var(--primary-purple), var(--secondary-purple));
+      color: white; /* Biarkan teks putih untuk kontras di latar belakang gradasi utama */
+      padding-top: 80px; /* Sesuaikan padding agar tidak terlalu mepet navbar */
+      padding-bottom: 80px;
+    }
+
+    .profile-img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border: 5px solid white;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .profile-section h1 {
+        color: var(--text-dark-purple); /* Warna ungu gelap untuk nama */
+    }
+
+    .profile-section .lead {
+        color: var(--text-dark-purple); /* Warna ungu gelap untuk profesi */
+    }
+
+    .social-icons a {
+      font-size: 2.5rem;
+      margin: 0 15px;
+      color: var(--text-dark-purple); /* Warna ungu gelap untuk ikon sosial */
+      transition: color 0.3s ease-in-out;
+    }
+
+    .social-icons a:hover {
+      color: var(--primary-purple); /* Ungu utama saat hover */
+    }
+
+    /* Kotak Latar Belakang untuk Konten (Tentang Saya, dll.) */
+    .content-card {
+        background-color: var(--light-purple); /* Warna ungu muda */
+        border-radius: 15px; /* Sudut membulat */
+        padding: 40px; /* Padding di dalam kartu */
+        margin-top: 50px; /* Jarak dari elemen di atasnya */
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Bayangan */
+    }
+
+
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid #e9ecef; /* Bisa disesuaikan jika ingin menghilangkan garis ini */
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    section h2 {
+      margin-bottom: 30px;
+      font-weight: 700;
+      position: relative;
+      padding-bottom: 10px;
+      color: var(--text-dark-purple); /* Warna ungu gelap untuk judul bagian */
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      height: 3px;
+      width: 60px;
+      background-color: var(--primary-purple); /* Menggunakan warna ungu primer */
+      border-radius: 5px;
+    }
+
+    .bg-light {
+      background-color: var(--bg-light) !important; /* Biarkan untuk bagian yang perlu terang */
+    }
+
+    /* Penyesuaian agar teks paragraf di dalam section lebih gelap */
+    section p.lead {
+        color: var(--text-dark); /* Menggunakan warna teks gelap standar */
+    }
+
+    .btn-outline-dark {
+      color: var(--text-dark-purple); /* Warna ungu gelap untuk teks tombol */
+      border-color: var(--text-dark-purple); /* Warna ungu gelap untuk border tombol */
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline-dark:hover {
+      background-color: var(--primary-purple); /* Warna ungu utama saat hover */
+      color: white;
+      border-color: var(--primary-purple);
+    }
+
+    .contact-info {
+      text-align: center;
+      padding: 30px 0;
+      background-color: var(--bg-dark); /* Tetap gelap agar kontras dengan bagian lain */
+      color: var(--text-light);
+    }
+
+    .contact-info hr {
+      border-color: rgba(255, 255, 255, 0.2);
+      width: 50px;
+      margin: 20px auto;
+    }
+
+    .contact-info p {
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Animasi saat Scroll (menggunakan Intersection Observer untuk kinerja yang lebih baik) */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .animate-on-scroll.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold animate__animated animate__fadeInDown" href="#">
+        <i class="bi bi-person-circle me-2"></i>BIOGRAFI ALEN
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#about"><i class="bi bi-info-circle me-1"></i>Tentang Saya</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#social-section"><i class="bi bi-share me-1"></i>Media Sosial</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-list-ul me-1"></i>Detail
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#experience"><i class="bi bi-briefcase me-2"></i>Pengalaman</a></li>
+              <li><a class="dropdown-item" href="#skills"><i class="bi bi-gear me-2"></i>Kemampuan</a></li>
+              <li><a class="dropdown-item" href="#hobbies"><i class="bi bi-heart me-2"></i>Hobi</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#institution"><i class="bi bi-building me-2"></i>Asal Instansi</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="profile-section animate__animated animate__fadeIn">
+    <div class="container text-center py-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <img src="foto/Salinan IMG-20250427-WA0240.jpg" alt="Foto Alen" class="profile-img rounded-circle mb-4 animate__animated animate__zoomIn">
+          <h1 class="display-5 fw-bold mb-3 animate__animated animate__fadeInUp">Alensya Lenora Ampoa</h1>
+          <p class="lead mb-4 animate__animated animate__fadeInUp animate__delay-1s">Mahasiswa</p>
+
+          <div class="social-icons animate__animated animate__fadeIn animate__delay-1s">
+            <a href="https://instagram.com/itsalennnn_" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.tiktok.com/@inialennn_?_t=ZS-8xWHq5rWnGq&_r=1" target="_blank" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+            <a href="https://www.facebook.com/alen.ampoa.2025" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="py-5 animate-on-scroll">
+    <div class="container">
+      <div class="content-card mx-auto"> <h2 class="text-center mb-4">Tentang Saya</h2>
+        <p class="text-center lead">Halo! Saya Alensya Lenora Ampoa, kalian dapat memanggil saya Alen. Saya lahir di Isu, Teon Nila Serua, Maluku Tengah, pada 1 Desember 2003. Saya merupakan anak kedua dari empat bersaudara. Saat ini, saya sedang menempuh pendidikan di Universitas Kristen Indonesia Maluku, Program Studi Informatika, Fakultas Ilmu Komputer. Saya juga aktif dalam organisasi eksternal kampus, yaitu Ikatan Duta Bahasa Provinsi Maluku dan Gerakan Mahasiswa Kristen Indonesia Komisariat Ilmu Komputer UKIM. Alasan saya memilih jurusan Informatika adalah karena saya melihat peluang kerja yang masih luas di bidang ini. Selain itu, saya aktif mengikuti organisasi karena dapat menambah pengetahuan serta memperluas relasi.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="py-5 animate-on-scroll">
+    <div class="container">
+      <div class="content-card mx-auto">
+        <h2 class="text-center mb-4">Pengalaman</h2>
+        <p class="text-center lead">Saya memiliki beberapa pengalaman di bidang akademik maupun nonakademik. Dalam bidang akademik, saya pernah beberapa kali mengikuti Olimpiade KSN bidang Ekonomi. Sementara itu, dalam bidang nonakademik, saya pernah menjadi anggota Paskibraka pada tahun 2020, menjadi Duta Bahasa Provinsi Maluku pada tahun 2024, serta dipercaya menjadi pengurus Gerakan Mahasiswa Kristen Indonesia (GMKI) Komisariat Ilmu Komputer UKIM. Saya juga sedang menjadi penerjemah Bahasa Melayu Ambon untuk program Cerita Anak yang diselenggarakan oleh Balai Bahasa Provinsi Maluku.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="py-5 animate-on-scroll">
+    <div class="container">
+      <div class="content-card mx-auto">
+        <h2 class="text-center mb-4">Kemampuan</h2>
+        <p class="text-center lead">Saya mampu mengoperasikan Ms. Word dan Ms. Excel.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="hobbies" class="py-5 animate-on-scroll">
+    <div class="container">
+      <div class="content-card mx-auto">
+        <h2 class="text-center mb-4">Hobi</h2>
+        <p class="text-center lead">Hobi saya tidur, tapi tidur tidak suka saya T_T</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="institution" class="py-5 animate-on-scroll">
+    <div class="container">
+      <div class="content-card mx-auto">
+        <h2 class="text-center mb-4">Asal Instansi</h2>
+        <p class="text-center lead">Universitas Kristen Indonesia Maluku</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="social-section" class="py-5 animate-on-scroll">
+    <div class="container">
+      <h2 class="text-center mb-4">Media Sosial</h2>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="https://instagram.com/itsalennnn_" class="btn btn-outline-dark btn-lg" target="_blank"><i class="bi bi-instagram me-2"></i>Itsalennnn_</a>
+        <a href="https://www.tiktok.com/@inialennn_?_t=ZS-8xWHq5rWnGq&_r=1" class="btn btn-outline-dark btn-lg" target="_blank"><i class="bi bi-tiktok me-2"></i>Inialennn_</a>
+        <a href="https://www.facebook.com/alen.ampoa.2025" class="btn btn-outline-dark btn-lg" target="_blank"><i class="bi bi-facebook me-2"></i>Alen Ampoa</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="contact-info animate__animated animate__fadeIn animate__delay-1-2s">
+    <div class="container">
+      <hr>
+      <p><i class="bi bi-envelope me-2"></i> alenleonora@gmail.com</p>
+      <p><i class="bi bi-telephone me-2"></i> +62 821-9975-8392</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // JavaScript Kustom untuk animasi scroll
+    document.addEventListener('DOMContentLoaded', () => {
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target); // Berhenti mengamati setelah dianimasikan
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.animate-on-scroll').forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
+</body>
+</html>
